@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/invite_layout"
+    android:layout_width="match_parent"
+    android:layout_height="65dip"
+    android:layout_alignParentBottom="true"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dip"
+        android:background="@drawable/line_invite_bg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/sdv_invite"
+            android:layout_width="71dip"
+            android:layout_height="60dip"
+            android:layout_marginLeft="16dip"
+            android:background="@mipmap/bb_invite_img" />
+
+        <TextView
+            android:id="@+id/txt_tv"
+            android:text="慕课网(IMOOC)是IT技能学习平台"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="6dip"
+            android:layout_marginRight="47dip"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="2"
+            android:textColor="#FF666666"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/invite_btn_tv"
+            android:text="下载"
+            android:layout_width="76dip"
+            android:layout_height="30dip"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="16dip"
+            android:background="@drawable/invite_btn_bg"
+            android:gravity="center"
+            android:textColor="#FF49C9C9"
+            android:textSize="13dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
