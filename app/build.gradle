@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.trevonnling'
+
 
 greendao {
     schemaVersion 1 //数据库版本号
