@@ -60,14 +60,10 @@ public class EmotionRainView extends View {
 
         stop();
         setVisibility(View.VISIBLE);
-        post(new Runnable() {
-            @Override
-            public void run() {
-                initAndResetData(list);
-                isRaining = true;
-                invalidate();
-            }
-        });
+
+        initAndResetData(list);
+        isRaining = true;
+        invalidate();
 
     }
 

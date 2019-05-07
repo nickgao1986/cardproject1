@@ -8,17 +8,19 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.http.api.ApiListener;
-import com.http.api.ApiUtil;
 import com.imooc.nick.cardtestproject.MainActivity;
 import com.imooc.nick.cardtestproject.R;
 import com.imooc.nick.cardtestproject.api.QuestionSaveApi;
 import com.imooc.nick.cardtestproject.bean.QuestionInfo;
 import com.imooc.nick.cardtestproject.view.ButtonSelectView;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class CardFragment extends Fragment {
 
@@ -108,25 +110,63 @@ public class CardFragment extends Fragment {
     }
 
     private void saveOptionInfo(final int option) {
-        new QuestionSaveApi(mCurrentInfo.question_id,
-                String.valueOf(option)).post(new ApiListener() {
-            @Override
-            public void success(ApiUtil api) {
-                QuestionSaveApi apiBase = (QuestionSaveApi)api;
-                boolean isCorrect = ((QuestionSaveApi) api).mRankInfo.is_correct.equals("1");
-                handleButtonSelectView(option,isCorrect);
+//        new QuestionSaveApi(mCurrentInfo.question_id,
+//                String.valueOf(option)).post(new ApiListener() {
+//            @Override
+//            public void success(ApiUtil api) {
+//                QuestionSaveApi apiBase = (QuestionSaveApi)api;
+//                boolean isCorrect = ((QuestionSaveApi) api).mRankInfo.is_correct.equals("1");
+//                handleButtonSelectView(option,isCorrect);
+//
+//                tip_layout.setVisibility(View.VISIBLE);
+//                TipContentTv.setText(mCurrentInfo.explain);
+//                mainActivity.setBottomTipView(apiBase.mRankInfo.correct_count);
+//
+//            }
+//
+//            @Override
+//            public void failure(ApiUtil api) {
+//
+//            }
+//        });
 
-                tip_layout.setVisibility(View.VISIBLE);
-                TipContentTv.setText(mCurrentInfo.explain);
-                mainActivity.setBottomTipView(apiBase.mRankInfo.correct_count);
+        //todo
+        String str = getFromAssets("submit.json", getContext());
+        try{
+            QuestionSaveApi apiBase = new QuestionSaveApi(mCurrentInfo.question_id,
+                    String.valueOf(option));
+            JSONObject jsonObject = new JSONObject(str);
+            apiBase.loadLocalData(jsonObject);
+            boolean isCorrect = apiBase.mRankInfo.is_correct.equals("1");
+            handleButtonSelectView(option,isCorrect);
 
-            }
+            tip_layout.setVisibility(View.VISIBLE);
+            TipContentTv.setText(mCurrentInfo.explain);
+            mainActivity.setBottomTipView(apiBase.mRankInfo.correct_count);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
-            @Override
-            public void failure(ApiUtil api) {
-
-            }
-        });
+    /**
+     * 获取本地的数据
+     * @param fileName
+     * @param context
+     * @return
+     */
+    public String getFromAssets(String fileName,final Context context){
+        try {
+            InputStreamReader inputReader = new InputStreamReader(context.getResources().getAssets().open(fileName) );
+            BufferedReader bufReader = new BufferedReader(inputReader);
+            String line="";
+            String Result="";
+            while((line = bufReader.readLine()) != null)
+                Result += line;
+            return Result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

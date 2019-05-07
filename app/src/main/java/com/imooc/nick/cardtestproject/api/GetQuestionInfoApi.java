@@ -26,4 +26,16 @@ public class GetQuestionInfoApi extends ApiUtil {
             ex.printStackTrace();
         }
     }
+
+    //todo
+    public void loadlocalData(JSONObject jsonObject) {
+        try {
+            JSONObject data =  jsonObject.optJSONObject("data");
+            JSONObject info =  data.optJSONObject("info");
+
+            mInfo = new Gson().fromJson(info.toString(),QuestionInfo.class);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

@@ -21,7 +21,7 @@ public class HistoryQuestionGetApi extends ApiUtil{
     }
 
     @Override
-    protected void parseData(JSONObject jsonObject) throws Exception {
+    protected void parseData(JSONObject jsonObject) {
         try{
             JSONObject dataInfo = jsonObject.optJSONObject("data");
             JSONArray array = (JSONArray)dataInfo.get("history_list");
@@ -38,5 +38,23 @@ public class HistoryQuestionGetApi extends ApiUtil{
         }
     }
 
+
+    //todo
+    public void loadlocalData(JSONObject jsonObject) {
+        try{
+            JSONObject dataInfo = jsonObject.optJSONObject("data");
+            JSONArray array = (JSONArray)dataInfo.get("history_list");
+            if(list != null) {
+                list.clear();
+            }
+
+            for (int i=0;i<array.length();i++) {
+                QuestionInfo questionInfo = new Gson().fromJson(array.get(i).toString(),QuestionInfo.class);
+                list.add(questionInfo);
+            }
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
 }

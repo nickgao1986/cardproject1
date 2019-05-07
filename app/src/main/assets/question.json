@@ -1,0 +1,17 @@
+{
+	"data": {
+		"info": {
+			"type": 2,
+			"question_id": "381",
+			"title": "活字印刷术是中国人发明的吗？",
+			"options": ["是", "不是"],
+			"answer": "1",
+			"knowledge_url": "http:\/\/knowledge-chenyong.babytree-dev.com\/knowledge\/detail\/11056",
+			"explain": "活字印刷术是北宋庆历间（1041年-1048年）中国的毕昇第一个发明的",
+			"sort": "73",
+			"status": "1"
+		}
+	},
+	"status": "success",
+	"message": ""
+}

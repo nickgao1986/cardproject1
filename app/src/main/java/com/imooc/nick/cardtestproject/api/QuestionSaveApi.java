@@ -35,6 +35,18 @@ public class QuestionSaveApi extends ApiUtil {
         }
     }
 
+    public void loadLocalData(JSONObject jsonObject) throws Exception {
+        try {
+            JSONObject dataInfo = (JSONObject) jsonObject.get("data");
+            JSONObject rankInfo = (JSONObject)dataInfo.get("rank_info");
+            mRankInfo.is_correct = rankInfo.optString("is_correct");
+            mRankInfo.total_count = rankInfo.optString("total_count");
+            mRankInfo.correct_count = rankInfo.optString("correct_count");
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     @Override
     protected boolean isBackInMainThread() {
         return true;
